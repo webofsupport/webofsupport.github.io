@@ -11,63 +11,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=3">
     <style>
-        .contact-hero {
-            padding-top: 200px;
-            padding-bottom: 100px;
-            text-align: center;
-            min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .contact-email {
-            font-size: clamp(32px, 5vw, 64px);
-            margin: 40px 0;
-            display: block;
-            font-weight: 500;
-        }
-
-        .contact-email:hover {
-            color: var(--text-secondary);
-        }
-
-        .contact-details {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 60px;
-        }
-
-        .footer-social a {
-            font-size: 18px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .footer-social a:hover {
-            color: var(--accent);
-        }
-
-        .footer-social a .text-part {
-            display: inline;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .footer-social a .arrow-part {
-            display: inline-block;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .footer-social a:hover .text-part {
-            transform: translateY(-4px);
-        }
-
-        .footer-social a:hover .arrow-part {
-            transform: translate(8px, -8px);
-        }
+        /* Keeping header fix if needed, but most styles moved to style.css */
     </style>
 </head>
 
@@ -86,47 +30,78 @@
     </header>
 
     <main>
-        <section class="container contact-hero">
-            <span class="category-label text-accent">Get in Touch</span>
-            <h1 style="font-size: clamp(40px, 6vw, 80px);">Let's create something together.</h1>
+        <section class="contact-section">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <span class="category-label text-accent">Get in Touch</span>
+                    <h1>Let's create something together.</h1>
+                    <p class="contact-description">Have a project in mind? We'd love to hear from you. Let's build
+                        something beautiful and save the orchestra together. 100% of proceeds go to the MYO.</p>
 
-            <div class="form-wrapper">
-                <form id="contact-form" action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name"
-                            required>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <span class="method-label">Email</span>
+                            <a href="mailto:jacob.wh.blais@gmail.com" class="method-link">jacob.wh.blais@gmail.com</a>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email"
-                            required>
+                    <div class="footer-social-links">
+                        <a href="https://www.x.com"><span class="text-part">Twitter</span> <span
+                                class="arrow-part">↗</span></a>
+                        <a href="https://www.linkedin.com"><span class="text-part">LinkedIn</span> <span
+                                class="arrow-part">↗</span></a>
+                        <a href="https://www.instagram.com"><span class="text-part">Instagram</span> <span
+                                class="arrow-part">↗</span></a>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <div class="form-wrapper">
+                        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                            <input type="hidden" name="access_key" value="399c5ad2-6da3-47bc-917c-63cd458027fc">
+                            <input type="hidden" name="subject" value="New Contact Form Submission - Web of Support">
+                            <input type="hidden" name="from_name" value="Web of Support Contact Form">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" name="name" class="form-input"
+                                    placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="form-input"
+                                    placeholder="Enter your email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea id="message" name="message" class="form-textarea" rows="5"
+                                    placeholder="Tell us about your project..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-pill"
+                                style="width:100%; justify-content:center; border:none; margin-top:16px;">
+                                Send Message
+                                <span class="custom-arrow">↗</span>
+                            </button>
+                        </form>
                     </div>
 
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" name="message" class="form-textarea" rows="5"
-                            placeholder="Tell us about your project..." required></textarea>
+                    <div id="success-message" class="success-message">
+                        <div class="success-icon">
+                            <svg viewBox="0 0 52 52">
+                                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                            </svg>
+                        </div>
+                        <div class="success-content">
+                            <h3>Message Sent!</h3>
+                            <p>Thank you for reaching out. We'll get back to you shortly.</p>
+                            <button type="button" class="btn-pill btn-small" onclick="location.reload()">Send another
+                                message</button>
+                        </div>
                     </div>
-
-                    <button type="submit" class="btn-pill"
-                        style="width:100%; justify-content:center; border:none; margin-top:16px;">
-                        Send Message
-                        <span class="custom-arrow">↗</span>
-                    </button>
-                </form>
-            </div>
-            <div id="success-message" class="success-message">
-                <div class="success-icon">✓</div>
-                <h3>Message Sent!</h3>
-                <p>Thank you for reaching out. We'll get back to you shortly.</p>
-            </div>
-
-            <div class="footer-social" style="display:flex; justify-content:center; gap: 40px; margin-top: 40px;">
-                <a href="https://www.x.com"><span class="text-part">Twitter</span> <span class="arrow-part">↗</span></a>
-                <a href="https://www.linkedin.com"><span class="text-part">LinkedIn</span> <span class="arrow-part">↗</span></a>
-                <a href="https://www.instagram.com"><span class="text-part">Instagram</span> <span class="arrow-part">↗</span></a>
+                </div>
             </div>
         </section>
 

@@ -24,6 +24,68 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Website Preview Animation */
+        .website-preview-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: var(--radius-card);
+        }
+
+        .website-preview {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: var(--radius-card);
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
+        }
+
+        .card-image-wrapper:hover .website-preview {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .preview-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e5e5e5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            opacity: 0.3;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .card-image-wrapper:hover .preview-placeholder {
+            opacity: 0;
+        }
+
+        .card-image-wrapper img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .card-image-wrapper:hover img {
+            width: 85%;
+            height: 85%;
+        }
+
+        .card-image-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1200px;
+        }
     </style>
 </head>
 
@@ -46,16 +108,14 @@
             <span class="category-label text-accent">Our Portfolio</span>
             <h1 style="margin-bottom: 24px;">Work that Drives Impact</h1>
             <p style="font-size: 20px; color: var(--text-secondary); max-width: 600px;">Every project below contributed
-                directly to keeping the Metro Youth Orchestra alive. High-end design, higher purpose.</p>
+                directly to keeping the Kitchener Waterloo Youth Orchestra alive. High-end design, higher purpose.</p>
 
             <div class="work-grid">
                 <!-- Project 1 -->
-                <a href="https://www.kwyo.ca" class="project-card">
+                <a href="https://www.kwyo.ca" class="project-card interactive-card">
                     <div class="card-image-wrapper">
-                        <div
-                            style="width:100%; height:100%; background: #f4f4f4; display:flex; align-items:center; justify-content:center;">
-                            <span style="font-size: 24px; opacity: 0.3;">Featured Project 01</span>
-                        </div>
+                        <div class="card-glare"></div>
+                        <img src="Images/kwyo.ca_.png" alt="KWYO Website Preview" class="scroll-img" />
                     </div>
                     <div class="card-meta">
                         <h3>Kitchener Waterloo Youth Orchestra</h3>
@@ -63,13 +123,11 @@
                     </div>
                 </a>
 
-                <!-- Project 2 -->
-                <a href="#" class="project-card">
+                <!-- Project 2 (Jacob Blais) -->
+                <a href="#" class="project-card interactive-card">
                     <div class="card-image-wrapper">
-                        <div
-                            style="width:100%; height:100%; background: #eaeaea; display:flex; align-items:center; justify-content:center;">
-                            <span style="font-size: 24px; opacity: 0.3;">Featured Project 02</span>
-                        </div>
+                        <div class="card-glare"></div>
+                        <!-- Image Removed -->
                     </div>
                     <div class="card-meta">
                         <h3>Jacob Blais</h3>
@@ -77,13 +135,11 @@
                     </div>
                 </a>
 
-                <!-- Project 3 -->
-                <a href="#" class="project-card">
+                <!-- Project 3 (Crescendo Gala) -->
+                <a href="#" class="project-card interactive-card">
                     <div class="card-image-wrapper">
-                        <div
-                            style="width:100%; height:100%; background: #f0f0f0; display:flex; align-items:center; justify-content:center;">
-                            <span style="font-size: 24px; opacity: 0.3;">Featured Project 03</span>
-                        </div>
+                        <div class="card-glare"></div>
+                        <!-- Image Removed -->
                     </div>
                     <div class="card-meta">
                         <h3>Crescendo Gala</h3>
@@ -91,13 +147,11 @@
                     </div>
                 </a>
 
-                <!-- Project 4 -->
-                <a href="#" class="project-card">
+                <!-- Project 4 (Community Outreach) -->
+                <a href="#" class="project-card interactive-card">
                     <div class="card-image-wrapper">
-                        <div
-                            style="width:100%; height:100%; background: #fafafa; display:flex; align-items:center; justify-content:center;">
-                            <span style="font-size: 24px; opacity: 0.3;">Featured Project 04</span>
-                        </div>
+                        <div class="card-glare"></div>
+                        <!-- Image Removed -->
                     </div>
                     <div class="card-meta">
                         <h3>Community Outreach</h3>
@@ -148,6 +202,73 @@
     </main>
 
     <script src="script.js"></script>
+    <script>
+        // Mouse tilt effect for project images
+        document.querySelectorAll('.card-image-wrapper').forEach(wrapper => {
+            // Check if this is an interactive card (we don't want tilt there, but we do want scroll reset)
+            const isInteractive = wrapper.closest('.interactive-card');
+
+            // If it is interactive, we ONLY care about the scroll reset on leave
+            if (isInteractive) {
+                wrapper.addEventListener('mouseleave', () => {
+                    // Smoothly scroll back to top when leaving
+                    wrapper.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+                return; // Skip the tilt logic
+            }
+
+            const glare = wrapper.querySelector('.card-glare');
+
+            wrapper.addEventListener('mousemove', (e) => {
+                const rect = wrapper.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                // Rotation
+                const rotateX = ((y - centerY) / centerY) * -15; // Increased rotation intensity
+                const rotateY = ((centerX - x) / centerX) * -15;
+
+                // Rotate the IMAGE or MOCKUP
+                const content = wrapper.querySelector('img') || wrapper.querySelector('.flat-mockup');
+                if (content) {
+                    content.style.transform = `scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                }
+
+                // Also rotate placeholder content if it exists
+                const placeholder = wrapper.querySelector('.preview-placeholder-content');
+                if (placeholder) {
+                    placeholder.style.transform = `scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                }
+
+                // Glare movement
+                if (glare) {
+                    // Position glare opposite to mouse slightly
+                    const glareX = 50 + ((x - centerX) / centerX) * 40;
+                    const glareY = 50 + ((y - centerY) / centerY) * 40;
+
+                    glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.25) 0%, transparent 50%)`;
+                    glare.style.opacity = '1';
+                }
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                const content = wrapper.querySelector('img') || wrapper.querySelector('.flat-mockup');
+                if (content) {
+                    content.style.transform = 'scale(1.01) rotateX(0) rotateY(0)';
+                }
+
+                if (glare) {
+                    glare.style.opacity = '0';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

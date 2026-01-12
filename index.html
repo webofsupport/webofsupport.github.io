@@ -36,7 +36,8 @@
             <div class="container hero-content">
                 <span class="category-label text-accent">Website Fundraising Campaign</span>
                 <h1>Your Website Can <br> Save the Orchestra.</h1>
-                <p class="hero-subtext">We build premium websites for businesses and individuals. <br> 100% of proceeds go directly to
+                <p class="hero-subtext">We build premium websites for businesses and individuals. <br> 100% of proceeds
+                    go directly to
                     saving the Kitchener Waterloo Youth Orchestra.</p>
 
                 <div class="hero-actions">
@@ -82,7 +83,8 @@
                         <p>The orchestra is facing a $10k funding gap. Without it, 150 students lose their music
                             education. <strong>Web of Support</strong> was built to solve this.</p>
                         <br>
-                        <p>We build professional websites for businesses like yours or individuals like yourself. Instead of paying a traditional
+                        <p>We build professional websites for businesses like yours or individuals like yourself.
+                            Instead of paying a traditional
                             agency, you pay the orchestra, so <strong>100% of the profit is donated</strong> to save the
                             orchestra.</p>
                     </div>
@@ -115,16 +117,68 @@
                 <span class="section-label">Services</span>
                 <div class="services-list">
                     <div class="service-item">
-                        <span class="service-name">Web Design</span>
-                        <span class="service-icon">↓</span>
+                        <div class="service-header">
+                            <span class="service-name">Web Design</span>
+                            <span class="service-icon">↓</span>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-details-inner">
+                                <div class="service-description">
+                                    <p>We build premium, high-converting websites that capture your brand's essence.
+                                        From complex e-commerce to minimalist portfolios, our designs are optimized for
+                                        every device.</p>
+                                    <ul class="service-features">
+                                        <li>Custom UI/UX Design</li>
+                                        <li>Responsive Development</li>
+                                        <li>Interactive Prototypes</li>
+                                        <li>Performance Optimization</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="service-item">
-                        <span class="service-name">SEO Optimization</span>
-                        <span class="service-icon">↓</span>
+                        <div class="service-header">
+                            <span class="service-name">SEO Optimization</span>
+                            <span class="service-icon">↓</span>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-details-inner">
+                                <div class="service-description">
+                                    <p>Getting found is just as important as looking good. We implement data-driven SEO
+                                        strategies to improve your organic reach and ensure your mission gets the
+                                        visibility it deserves.</p>
+                                    <ul class="service-features">
+                                        <li>Technical SEO Audits</li>
+                                        <li>Keyword Strategy</li>
+                                        <li>On-page Optimization</li>
+                                        <li>Search Analytics</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="service-item">
-                        <span class="service-name">Personal Branding</span>
-                        <span class="service-icon">↓</span>
+                        <div class="service-header">
+                            <span class="service-name">Personal Branding</span>
+                            <span class="service-icon">↓</span>
+                        </div>
+                        <div class="service-details">
+                            <div class="service-details-inner">
+                                <div class="service-description">
+                                    <p>For independent artists, teachers, and professionals, we craft cohesive visual
+                                        identities that speak volumes before you even say a word.</p>
+                                    <ul class="service-features">
+                                        <li>Visual Identity Design</li>
+                                        <li>Color & Typography Sets</li>
+                                        <li>Social Media Kits</li>
+                                        <li>Digital Assets</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,11 +189,15 @@
             <div class="container">
                 <div style="text-align: center; margin-bottom: 60px;">
                     <span class="section-label text-accent">Get in Touch</span>
-                    <h2 style="font-size: clamp(32px, 5vw, 48px);">Ready to save the orchestra? <br> Let's start a project.
+                    <h2 style="font-size: clamp(32px, 5vw, 48px);">Ready to save the orchestra? <br> Let's start a
+                        project.
                     </h2>
                 </div>
                 <div class="form-wrapper">
-                    <form id="contact-form" action="#" method="POST">
+                    <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="399c5ad2-6da3-47bc-917c-63cd458027fc">
+                        <input type="hidden" name="subject" value="New Contact Form Submission - Web of Support">
+                        <input type="hidden" name="from_name" value="Web of Support Contact Form">
                         <div class="form-group">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name"
@@ -166,10 +224,20 @@
                     </form>
                 </div>
                 <div id="success-message" class="success-message">
-                    <div class="success-icon">✓</div>
-                    <h3>Message Sent!</h3>
-                    <p>Thank you for reaching out. We'll get back to you shortly to discuss your project and how we can
-                        save the music together.</p>
+                    <div class="success-icon">
+                        <svg viewBox="0 0 52 52">
+                            <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                            <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                        </svg>
+                    </div>
+                    <div class="success-content">
+                        <h3>Message Sent!</h3>
+                        <p>Thank you for reaching out. We'll get back to you shortly to discuss your project and how we
+                            can
+                            save the music together.</p>
+                        <button type="button" class="btn-pill btn-small" onclick="location.reload()">Send another
+                            message</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -181,7 +249,7 @@
                     <span class="footer-label">Contact</span>
                     <h2>Let's start creating together</h2>
                     <br>
-                    <a href="mailto:help@crescendodigital.org" class="btn-pill btn-footer">
+                    <a href="mailto:jacob.wh.blais@gmail.com" class="btn-pill btn-footer">
                         Let's talk
                         <span class="custom-arrow">↗</span>
                     </a>

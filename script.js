@@ -69,23 +69,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formWrapper = contactForm.closest('.form-wrapper');
             const successMessage = document.getElementById('success-message');
+            const formData = new FormData(contactForm);
 
             if (formWrapper && successMessage) {
                 // Start submission transition
                 formWrapper.classList.add('is-submitting');
 
-                // Simulate network delay for "satisfying" feedback
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
 
-                // Fade out form
-                formWrapper.classList.add('is-sent');
+                    // Formspree returns 200 on success
+                    if (response.ok) {
+                        // Fade out form
+                        formWrapper.classList.add('is-sent');
 
-                // After form fades out, show success message
-                setTimeout(() => {
-                    formWrapper.classList.add('hidden');
-                    successMessage.classList.add('show');
-                }, 500);
+                        // After form fades out, show success message
+                        setTimeout(() => {
+                            formWrapper.classList.add('hidden');
+                            successMessage.classList.add('show');
+                            contactForm.reset();
+                        }, 500);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('There was an error sending your message. Please try again.');
+                    formWrapper.classList.remove('is-submitting');
+                }
             }
         });
     }
+
+    // Service Accordion Functionality
+    const serviceItems = document.querySelectorAll('.service-item');
+    serviceItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // Close other items
+            serviceItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
 });
