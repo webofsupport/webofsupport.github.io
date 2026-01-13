@@ -810,6 +810,11 @@ footer {
         /* Allow it to be wider on tablet/mobile */
     }
 
+    .mission-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
     .mission-stats-container {
         grid-template-columns: 1fr;
     }
